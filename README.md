@@ -1,2 +1,2 @@
-servermonitor
+Web Server Monitor
 =============
