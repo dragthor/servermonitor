@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="ServerMonitor.ServerMonitor">
 	<uses-sdk />
-	<application android:label="ServerMonitor" android:icon="@drawable/icon"></application>
+	<application android:label="Server Monitor" android:icon="@drawable/icon"></application>
 	<uses-permission android:name="android.permission.INTERNET" />
 </manifest>

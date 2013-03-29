@@ -26,3 +26,7 @@ using Android.App;
 //[assembly: AssemblyDelaySign(false)]
 //[assembly: AssemblyKeyFile("")]
 
+
+[assembly: Application(Debuggable=true)] 
+//[assembly: Application(Debuggable=false)]
+
