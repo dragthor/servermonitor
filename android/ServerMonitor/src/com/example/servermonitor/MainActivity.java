@@ -3,7 +3,10 @@ package com.example.servermonitor;
 import java.util.Locale;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -11,6 +14,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -163,13 +167,19 @@ public class MainActivity extends FragmentActivity implements
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main_dummy,
-					container, false);
-			TextView dummyTextView = (TextView) rootView
-					.findViewById(R.id.section_label);
-			dummyTextView.setText(Integer.toString(getArguments().getInt(
-					ARG_SECTION_NUMBER)));
+			
+			View rootView = inflater.inflate(R.layout.fragment_main_dummy, container, false);
+			
+			TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
+			
+			int sectionNumber = getArguments().getInt(ARG_SECTION_NUMBER);
+			
+			dummyTextView.setText(Integer.toString(sectionNumber));
+				
+			// Log.d("App", "Showing " + Integer.toString(sectionNumber));
+			
 			return rootView;
+
 		}
 	}
 
