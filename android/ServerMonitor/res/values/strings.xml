@@ -7,5 +7,14 @@
     <string name="title_section2">QA</string>
     <string name="title_section3">Dev</string>
     <string name="about_settings">About Us</string>
+    <string-array name="prod_items">
+        <item >Katie Krause</item>
+        <item >Kris Krause</item>
+        <item >Cassie Krause</item>
+        <item >Christine Krause</item>
+        <item >Santa Claus</item>
+    </string-array>
+    <string-array name="qa_items"></string-array>
+    <string-array name="dev_items"></string-array>
 
 </resources>

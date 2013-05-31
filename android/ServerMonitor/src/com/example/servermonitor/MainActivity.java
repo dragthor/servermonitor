@@ -8,6 +8,7 @@ import android.app.DialogFragment;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -21,6 +22,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class MainActivity extends FragmentActivity implements
@@ -170,17 +174,33 @@ public class MainActivity extends FragmentActivity implements
 			
 			View rootView = inflater.inflate(R.layout.fragment_main_dummy, container, false);
 			
+			ProgressBar spinner = (ProgressBar) rootView.findViewById(R.id.progressBar1);
+	
+			spinner.setVisibility(View.INVISIBLE);
+			
 			TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
 			
 			int sectionNumber = getArguments().getInt(ARG_SECTION_NUMBER);
 			
-			dummyTextView.setText(Integer.toString(sectionNumber));
+			dummyTextView.setText("Loading... " + Integer.toString(sectionNumber));
 				
 			// Log.d("App", "Showing " + Integer.toString(sectionNumber));
 			
+			spinner.setVisibility(View.VISIBLE);
+			
+			ListView listItem = (ListView) rootView.findViewById(R.id.listView1);
+			
+			ArrayAdapter<String> items =
+					new ArrayAdapter<String>(this.getActivity(), R.layout.fragment_main_dummy, getResources().getStringArray(R.array.prod_items));
+			
+			// items.setDropDownViewResource(R.layout.fragment_main_dummy);
+			
+			Log.d("App", Integer.toString(items.getCount()));
+			
+			// listItem.setAdapter(items);
+			     
 			return rootView;
 
 		}
 	}
-
 }
