@@ -1,6 +1,10 @@
 package com.example.servermonitor;
 
+import java.net.URI;
+import java.net.URL;
 import java.util.Locale;
+
+import org.json.JSONObject;
 
 import android.app.ActionBar;
 import android.app.AlertDialog;
@@ -93,6 +97,31 @@ public class MainActivity extends FragmentActivity implements
 		return true;
 	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle item selection
+	    switch (item.getItemId()) {
+	    case R.id.about_settings:
+	        //
+	        return true;
+	    case R.id.action_settings:
+	        //
+	        return true;
+	    case R.id.unit_test_settings:
+	    	new JsonDataRetriever()
+			{
+			    @Override public void onPostExecute(String result)
+			    {
+			    	Log.e("App", result);
+			    }
+			}.execute("http://dragthor.github.io/southridge/albums-11.json");
+			
+	    	return true;
+	    default:
+	        return super.onOptionsItemSelected(item);
+	    }
+	}
+	
 	@Override
 	public void onTabSelected(ActionBar.Tab tab,
 			FragmentTransaction fragmentTransaction) {
@@ -198,7 +227,17 @@ public class MainActivity extends FragmentActivity implements
 			Log.d("App", Integer.toString(items.getCount()));
 			
 			// listItem.setAdapter(items);
-			     
+			
+			//new JsonDataRetriever().execute("http://dragthor.github.io/southridge/albums-11.json");
+			
+			/*new JsonDataRetriever()
+			{
+			    @Override public void onPostExecute(String result)
+			    {
+			    	Log.e("App", result);
+			    }
+			}.execute("http://dragthor.github.io/southridge/albums-11.json"); */
+			
 			return rootView;
 
 		}

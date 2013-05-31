@@ -35,6 +35,7 @@ public final class R {
         public static final int pager=0x7f090000;
         public static final int progressBar1=0x7f090002;
         public static final int section_label=0x7f090001;
+        public static final int unit_test_settings=0x7f090006;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -50,6 +51,7 @@ public final class R {
         public static final int title_section1=0x7f050002;
         public static final int title_section2=0x7f050003;
         public static final int title_section3=0x7f050004;
+        public static final int unit_test_settings=0x7f050006;
     }
     public static final class style {
         /** 
