@@ -18,6 +18,7 @@ import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
@@ -109,10 +110,12 @@ public class MainActivity extends FragmentActivity implements
 	    // Handle item selection
 	    switch (item.getItemId()) {
 	    case R.id.about_settings:
-	        //
+	    	Intent aboutIntent = new Intent(this, AboutActivity.class);
+	    	startActivity(aboutIntent);
 	        return true;
 	    case R.id.action_settings:
-	        //
+	    	Intent settingsIntent = new Intent(this, SettingsActivity.class);
+	    	startActivity(settingsIntent);
 	        return true;
 	    case R.id.unit_test_settings:
 	    	new JsonDataRetriever()
