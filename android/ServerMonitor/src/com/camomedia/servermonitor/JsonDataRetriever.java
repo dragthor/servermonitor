@@ -1,4 +1,4 @@
-package com.example.servermonitor;
+package com.camomedia.servermonitor;
 
 import android.os.AsyncTask;
 import android.util.Log;

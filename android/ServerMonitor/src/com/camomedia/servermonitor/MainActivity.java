@@ -1,10 +1,17 @@
-package com.example.servermonitor;
+package com.camomedia.servermonitor;
 
 import java.net.URI;
 import java.net.URL;
 import java.util.Locale;
 
 import org.json.JSONObject;
+
+import com.camomedia.servermonitor.R;
+import com.camomedia.servermonitor.R.array;
+import com.camomedia.servermonitor.R.id;
+import com.camomedia.servermonitor.R.layout;
+import com.camomedia.servermonitor.R.menu;
+import com.camomedia.servermonitor.R.string;
 
 import android.app.ActionBar;
 import android.app.AlertDialog;
@@ -40,7 +47,7 @@ public class MainActivity extends FragmentActivity implements
 	 * {@link android.support.v4.app.FragmentPagerAdapter} derivative, which
 	 * will keep every loaded fragment in memory. If this becomes too memory
 	 * intensive, it may be best to switch to a
-	 * {@link android.support.v4.app.FragmentStatePagerAdapter}.
+	 * {@link android`.support.v4.app.FragmentStatePagerAdapter}.
 	 */
 	SectionsPagerAdapter mSectionsPagerAdapter;
 

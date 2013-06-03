@@ -1,4 +1,4 @@
-package com.example.servermonitor;
+package com.camomedia.servermonitor;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
