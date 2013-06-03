@@ -2,7 +2,6 @@ package com.camomedia.servermonitor;
 
 import android.os.AsyncTask;
 import android.util.Log;
-
 import org.json.*;
 
 public class JsonDataRetriever extends AsyncTask<String, Integer, String> {
@@ -22,28 +21,14 @@ public class JsonDataRetriever extends AsyncTask<String, Integer, String> {
 			
 			result = json.toString();
 			
-			result = "Success";
-			
-			 for(int i=0;i<5;i++) {
-                 try {
-                     Thread.sleep(1000);
-                     
-                     publishProgress(i);
-                     
-                 } catch (InterruptedException e) {
-                     // TODO Auto-generated catch block
-                	 Log.e("App", e.getMessage());
-                 }
-             }
-			 
-			result = "Success";
+			// publishProgress(i);
 		} catch (Exception ex) {
 			Log.e("App", ex.getMessage());
 		}
 		return result;
 	}
 
-	protected void onProgressUpdate(Integer... progress) {
+	/* protected void onProgressUpdate(Integer... progress) {
 		 Log.e("App", "Progress... " + Integer.toString(progress[0]));
-    }
+    } */
 }

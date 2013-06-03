@@ -8,7 +8,6 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.*;
 
@@ -19,7 +18,7 @@ public class Json {
 		String result = "";
 		JSONObject jsonObject = null;
 		
-		// HTTP
+		// HTTP Get
 		try {	    	
 			HttpClient httpclient = new DefaultHttpClient(); // for port 80 requests!
 			HttpGet httpget = new HttpGet(url);
@@ -52,7 +51,5 @@ public class Json {
 		}
     
 		return jsonObject;
-
 	}
-	
 }
