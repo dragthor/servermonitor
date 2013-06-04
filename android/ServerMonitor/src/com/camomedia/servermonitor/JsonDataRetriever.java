@@ -15,7 +15,7 @@ public class JsonDataRetriever extends AsyncTask<String, Integer, String> {
 		String result = "Done and done.";
 		
 		try {
-			Log.e("App", urls[0]);
+			Log.e(MainActivity.TAG, urls[0]);
 			
 			JSONObject json = Json.getJson(urls[0]);
 			
@@ -23,12 +23,12 @@ public class JsonDataRetriever extends AsyncTask<String, Integer, String> {
 			
 			// publishProgress(i);
 		} catch (Exception ex) {
-			Log.e("App", ex.getMessage());
+			Log.e(MainActivity.TAG, ex.getMessage());
 		}
 		return result;
 	}
 
 	/* protected void onProgressUpdate(Integer... progress) {
-		 Log.e("App", "Progress... " + Integer.toString(progress[0]));
+		 Log.e(MainActivity.TAG, "Progress... " + Integer.toString(progress[0]));
     } */
 }

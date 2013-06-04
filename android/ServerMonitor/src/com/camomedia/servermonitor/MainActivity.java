@@ -39,9 +39,10 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class MainActivity extends FragmentActivity implements
-		ActionBar.TabListener {
+public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
 
+	public static final String TAG = "ServerMonitor";
+	
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
 	 * fragments for each of the sections. We use a
@@ -68,8 +69,7 @@ public class MainActivity extends FragmentActivity implements
 
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
-		mSectionsPagerAdapter = new SectionsPagerAdapter(
-				getSupportFragmentManager());
+		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -78,13 +78,12 @@ public class MainActivity extends FragmentActivity implements
 		// When swiping between different sections, select the corresponding
 		// tab. We can also use ActionBar.Tab#select() to do this if we have
 		// a reference to the Tab.
-		mViewPager
-				.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-					@Override
-					public void onPageSelected(int position) {
-						actionBar.setSelectedNavigationItem(position);
-					}
-				});
+		mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+			@Override
+			public void onPageSelected(int position) {
+				actionBar.setSelectedNavigationItem(position);
+			}
+		});
 
 		// For each of the sections in the app, add a tab to the action bar.
 		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
@@ -122,7 +121,7 @@ public class MainActivity extends FragmentActivity implements
 			{
 			    @Override public void onPostExecute(String result)
 			    {
-			    	Log.e("App", result);
+			    	Log.e(MainActivity.TAG, result);
 			    }
 			}.execute("http://dragthor.github.io/southridge/albums-11.json");
 			
@@ -133,21 +132,18 @@ public class MainActivity extends FragmentActivity implements
 	}
 	
 	@Override
-	public void onTabSelected(ActionBar.Tab tab,
-			FragmentTransaction fragmentTransaction) {
+	public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
 		// When the given tab is selected, switch to the corresponding page in
 		// the ViewPager.
 		mViewPager.setCurrentItem(tab.getPosition());
 	}
 
 	@Override
-	public void onTabUnselected(ActionBar.Tab tab,
-			FragmentTransaction fragmentTransaction) {
+	public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
 	}
 
 	@Override
-	public void onTabReselected(ActionBar.Tab tab,
-			FragmentTransaction fragmentTransaction) {
+	public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
 	}
 
 	/**
@@ -208,8 +204,7 @@ public class MainActivity extends FragmentActivity implements
 		}
 
 		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 			
 			View rootView = inflater.inflate(R.layout.fragment_main_dummy, container, false);
 			
@@ -223,8 +218,6 @@ public class MainActivity extends FragmentActivity implements
 			
 			dummyTextView.setText("Loading... " + Integer.toString(sectionNumber));
 				
-			// Log.d("App", "Showing " + Integer.toString(sectionNumber));
-			
 			spinner.setVisibility(View.VISIBLE);
 			
 			ListView listItem = (ListView) rootView.findViewById(R.id.listView1);
@@ -234,7 +227,7 @@ public class MainActivity extends FragmentActivity implements
 			
 			// items.setDropDownViewResource(R.layout.fragment_main_dummy);
 			
-			Log.d("App", Integer.toString(items.getCount()));
+			Log.d(MainActivity.TAG, Integer.toString(items.getCount()));
 			
 			// listItem.setAdapter(items);
 			
@@ -244,7 +237,7 @@ public class MainActivity extends FragmentActivity implements
 			{
 			    @Override public void onPostExecute(String result)
 			    {
-			    	Log.e("App", result);
+			    	Log.e(Log.d(MainActivity.TAG, result);
 			    }
 			}.execute("http://dragthor.github.io/southridge/albums-11.json"); */
 			

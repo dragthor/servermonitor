@@ -9,8 +9,67 @@
     tools:context=".AboutActivity" >
 
     <TextView
+        android:id="@+id/lblMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/about_main" />
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/about_main"
+        android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/lblVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lblMain"
+        android:layout_below="@+id/lblMain"
+        android:layout_marginTop="30dp"
+        android:text="@string/about_version" />
+
+        <TextView
+        android:id="@+id/lblEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lblVersion"
+        android:layout_below="@+id/lblVersion"
+        android:layout_marginTop="30dp"
+        android:text="@string/about_email" />
+    
+   
+                <TextView
+        android:id="@+id/lblLicense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lblEmail"
+        android:layout_below="@+id/lblEmail"
+        android:layout_marginTop="30dp"
+        android:text="@string/about_license" />
+                
+                               <TextView
+        android:id="@+id/lblLicenseCopyright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lblLicense"
+        android:layout_below="@+id/lblLicense"
+        android:layout_marginTop="30dp"
+        android:text="@string/about_license_copyright" />
+                               
+     <TextView
+        android:id="@+id/lblWiki"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lblLicenseCopyright"
+        android:layout_below="@+id/lblLicenseCopyright"
+        android:layout_marginTop="30dp"
+        android:text="@string/about_license_wikiUrl" />
+     
+          <TextView
+        android:id="@+id/lblProjectHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lblWiki"
+        android:layout_below="@+id/lblWiki"
+        android:layout_marginTop="30dp"
+        android:text="@string/about_license_projectUrl" />
+     
 </RelativeLayout>

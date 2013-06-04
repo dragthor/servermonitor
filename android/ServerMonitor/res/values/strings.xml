@@ -6,7 +6,7 @@
     <string name="title_section1">Prod</string>
     <string name="title_section2">QA</string>
     <string name="title_section3">Dev</string>
-    <string name="about_settings">About Us</string>
+    <string name="about_settings">About</string>
 
     <string-array name="prod_items">
         <item>Katie Krause</item>
@@ -20,6 +20,12 @@
 
     <string name="unit_test_settings">Test</string>
     <string name="title_activity_about">AboutActivity</string>
-    <string name="about_main">Camo Media, LLC</string>
+    <string name="about_main">Server Monitor</string>
+    <string name="about_version">Version 0.1</string>
+    <string name="about_email">kris.krause@gmail.com</string>
+    <string name="about_license">The MIT License (MIT)</string>
+    <string name="about_license_copyright">Copyright (&#169;) 2013 Kristofer A. Krause</string>
+    <string name="about_license_wikiUrl">http://www.github.com/dragthor</string>
+    <string name="about_license_projectUrl">http://dragthor.github.io</string>
 
 </resources>

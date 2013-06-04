@@ -44,6 +44,8 @@ public class SettingsActivity extends PreferenceActivity {
 		super.onPostCreate(savedInstanceState);
 
 		setupSimplePreferencesScreen();
+		
+		setTitle("Settings");
 	}
 
 	/**
