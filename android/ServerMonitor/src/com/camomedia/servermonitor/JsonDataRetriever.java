@@ -4,28 +4,27 @@ import android.os.AsyncTask;
 import android.util.Log;
 import org.json.*;
 
-public class JsonDataRetriever extends AsyncTask<String, Integer, String> {
+public class JsonDataRetriever extends AsyncTask<String, Integer, JSONObject> {
 
 	public JsonDataRetriever() {
 	
 	}
 	
 	@Override
-	protected String doInBackground(String...urls) {
+	protected JSONObject doInBackground(String...urls) {
 		String result = "Done and done.";
+		JSONObject json = null;
 		
 		try {
 			Log.e(MainActivity.TAG, urls[0]);
 			
-			JSONObject json = Json.getJson(urls[0]);
-			
-			result = json.toString();
+			json = Json.getJson(urls[0]);
 			
 			// publishProgress(i);
 		} catch (Exception ex) {
 			Log.e(MainActivity.TAG, ex.getMessage());
 		}
-		return result;
+		return json;
 	}
 
 	/* protected void onProgressUpdate(Integer... progress) {

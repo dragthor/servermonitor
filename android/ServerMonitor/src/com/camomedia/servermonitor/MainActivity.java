@@ -2,8 +2,11 @@ package com.camomedia.servermonitor;
 
 import java.net.URI;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Locale;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.camomedia.servermonitor.R;
@@ -34,6 +37,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -119,9 +123,23 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	    case R.id.unit_test_settings:
 	    	new JsonDataRetriever()
 			{
-			    @Override public void onPostExecute(String result)
+			    @Override public void onPostExecute(JSONObject jsonResult)
 			    {
-			    	Log.e(MainActivity.TAG, result);
+			    	/*
+			    	try {
+						JSONObject json2 = jsonResult.getJSONObject("data");
+						
+						JSONArray names = json2.getJSONArray("name");
+						
+						for (int i = 0; i < names.length(); i++) {
+							Log.d(TAG, names.getString(i));
+						}
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} */
+			    	
+			    	//Log.e(MainActivity.TAG, jsonResult);
 			    }
 			}.execute("http://dragthor.github.io/southridge/albums-11.json");
 			
@@ -208,38 +226,58 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			
 			View rootView = inflater.inflate(R.layout.fragment_main_dummy, container, false);
 			
-			ProgressBar spinner = (ProgressBar) rootView.findViewById(R.id.progressBar1);
+			final ProgressBar spinner = (ProgressBar) rootView.findViewById(R.id.progressBar1);
 	
 			spinner.setVisibility(View.INVISIBLE);
 			
-			TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
-			
 			int sectionNumber = getArguments().getInt(ARG_SECTION_NUMBER);
 			
-			dummyTextView.setText("Loading... " + Integer.toString(sectionNumber));
-				
 			spinner.setVisibility(View.VISIBLE);
 			
-			ListView listItem = (ListView) rootView.findViewById(R.id.listView1);
+			ListView listItem = (ListView) rootView.findViewById(R.id.lstItems);
 			
-			ArrayAdapter<String> items =
-					new ArrayAdapter<String>(this.getActivity(), R.layout.fragment_main_dummy, getResources().getStringArray(R.array.prod_items));
+			String[] listValues = getResources().getStringArray(R.array.prod_items);
 			
-			// items.setDropDownViewResource(R.layout.fragment_main_dummy);
+			final ArrayList<String> list = new ArrayList<String>();
+		    
+			for (int i = 0; i < listValues.length; ++i) {
+		      list.add(listValues[i]);
+		    }
+		    
+			final ServerArrayAdapter adapter = new ServerArrayAdapter(this.getActivity(), android.R.layout.simple_list_item_1, list);
+				
+			Log.d(MainActivity.TAG, "Section: " + Integer.toString(sectionNumber) + ", " + Integer.toString(list.size()));
 			
-			Log.d(MainActivity.TAG, Integer.toString(items.getCount()));
+			listItem.setAdapter(adapter);
 			
-			// listItem.setAdapter(items);
+			listItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			      @Override
+			      public void onItemClick(AdapterView<?> parent, final View view,
+			          int position, long id) {
+			        final String item = (String) parent.getItemAtPosition(position);
+			        view.animate().setDuration(2000).alpha(0)
+			            .withEndAction(new Runnable() {
+			              @Override
+			              public void run() {
+			                list.remove(item);
+			                adapter.notifyDataSetChanged();
+			                view.setAlpha(1);
+			              }
+			            });
+			      }
+
+			    });
 			
-			//new JsonDataRetriever().execute("http://dragthor.github.io/southridge/albums-11.json");
 			
-			/*new JsonDataRetriever()
+			new JsonDataRetriever()
 			{
-			    @Override public void onPostExecute(String result)
+			    @Override public void onPostExecute(JSONObject jsonResult)
 			    {
-			    	Log.e(Log.d(MainActivity.TAG, result);
+			    	// TODO: do something with the jsonResult.
+			    	spinner.setVisibility(View.INVISIBLE);
 			    }
-			}.execute("http://dragthor.github.io/southridge/albums-11.json"); */
+			}.execute("http://dragthor.github.io/southridge/albums-11.json");
 			
 			return rootView;
 
