@@ -43,10 +43,15 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.parse.Parse;
+import com.parse.ParseAnalytics;
+import com.parse.ParseObject;
+
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
 
 	public static final String TAG = "ServerMonitor";
-	
+	public static final String PARSE_APPID = "KQLXx6w5tQmzP9qacxwac4HLfy1eewISrBPPyvnU";
+	public static final String PARSE_CLIENTKEY = "";
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
 	 * fragments for each of the sections. We use a
@@ -99,6 +104,14 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 					.setText(mSectionsPagerAdapter.getPageTitle(i))
 					.setTabListener(this));
 		}
+			
+		Parse.initialize(this, PARSE_APPID, PARSE_CLIENTKEY); 
+		
+		ParseAnalytics.trackAppOpened(getIntent());
+		
+		ParseObject testObject = new ParseObject("TestObject");
+		testObject.put("foo", "bar");
+		testObject.saveInBackground();
 	}
 
 	@Override
