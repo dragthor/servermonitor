@@ -121,28 +121,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	    	startActivity(settingsIntent);
 	        return true;
 	    case R.id.unit_test_settings:
-	    	new JsonDataRetriever()
-			{
-			    @Override public void onPostExecute(JSONObject jsonResult)
-			    {
-			    	/*
-			    	try {
-						JSONObject json2 = jsonResult.getJSONObject("data");
-						
-						JSONArray names = json2.getJSONArray("name");
-						
-						for (int i = 0; i < names.length(); i++) {
-							Log.d(TAG, names.getString(i));
-						}
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} */
-			    	
-			    	//Log.e(MainActivity.TAG, jsonResult);
-			    }
-			}.execute("http://dragthor.github.io/southridge/albums-11.json");
-			
+	    	Intent testIntent = new Intent(this, TestActivity.class);
+	    	startActivity(testIntent);		
 	    	return true;
 	    default:
 	        return super.onOptionsItemSelected(item);
@@ -256,7 +236,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			      public void onItemClick(AdapterView<?> parent, final View view,
 			          int position, long id) {
 			        final String item = (String) parent.getItemAtPosition(position);
-			        view.animate().setDuration(2000).alpha(0)
+			        view.animate().setDuration(1000).alpha(0)
 			            .withEndAction(new Runnable() {
 			              @Override
 			              public void run() {

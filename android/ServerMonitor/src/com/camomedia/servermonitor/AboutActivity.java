@@ -16,10 +16,9 @@ public class AboutActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.activity_about);
 
-		setTitle("About");
-		
 		// Get instance of Vibrator from current Context
 		Vibrator v = (Vibrator) getSystemService(this.VIBRATOR_SERVICE);
 

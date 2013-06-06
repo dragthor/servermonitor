@@ -15,7 +15,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="20dp"
         android:text="@string/about_main"
-        android:textStyle="bold" />
+        android:textStyle="bold" 
+        />
 
     <TextView
         android:id="@+id/lblVersion"
