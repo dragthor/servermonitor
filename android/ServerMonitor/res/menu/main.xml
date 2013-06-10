@@ -8,5 +8,6 @@
     
     <item android:id="@+id/about_settings" android:title="@string/about_settings" android:orderInCategory="101" android:showAsAction="never"></item>
     <item android:id="@+id/unit_test_settings" android:title="@string/unit_test_settings" android:orderInCategory="102"></item>
+    <item android:id="@+id/close_settings" android:orderInCategory="103" android:title="@string/close_settings"></item>
 
 </menu>

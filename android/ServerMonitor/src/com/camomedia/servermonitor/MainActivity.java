@@ -1,57 +1,38 @@
 package com.camomedia.servermonitor;
 
-import java.net.URI;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.camomedia.servermonitor.R;
-import com.camomedia.servermonitor.R.array;
-import com.camomedia.servermonitor.R.id;
-import com.camomedia.servermonitor.R.layout;
-import com.camomedia.servermonitor.R.menu;
-import com.camomedia.servermonitor.R.string;
+import com.camomedia.servermonitor.tests.JsonTest;
+import com.camomedia.servermonitor.tests.ParseTest;
 
 import android.app.ActionBar;
-import android.app.AlertDialog;
-import android.app.DialogFragment;
+import android.app.Activity;
 import android.app.FragmentTransaction;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
-
-import com.parse.Parse;
-import com.parse.ParseAnalytics;
-import com.parse.ParseObject;
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
 
 	public static final String TAG = "ServerMonitor";
-	public static final String PARSE_APPID = "KQLXx6w5tQmzP9qacxwac4HLfy1eewISrBPPyvnU";
-	public static final String PARSE_CLIENTKEY = "";
+
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
 	 * fragments for each of the sections. We use a
@@ -104,14 +85,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 					.setText(mSectionsPagerAdapter.getPageTitle(i))
 					.setTabListener(this));
 		}
-			
-		Parse.initialize(this, PARSE_APPID, PARSE_CLIENTKEY); 
 		
-		ParseAnalytics.trackAppOpened(getIntent());
-		
-		ParseObject testObject = new ParseObject("TestObject");
-		testObject.put("foo", "bar");
-		testObject.saveInBackground();
+		ParseManager.Initialize(this, getIntent());
 	}
 
 	@Override
@@ -134,8 +109,11 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	    	startActivity(settingsIntent);
 	        return true;
 	    case R.id.unit_test_settings:
-	    	Intent testIntent = new Intent(this, TestActivity.class);
-	    	startActivity(testIntent);		
+	    	ParseTest.TestAll();
+	    	JsonTest.TestAll();
+	    	return true;
+	    case R.id.close_settings:
+	    	this.finish();
 	    	return true;
 	    default:
 	        return super.onOptionsItemSelected(item);
@@ -245,35 +223,26 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			
 			listItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-			      @Override
-			      public void onItemClick(AdapterView<?> parent, final View view,
-			          int position, long id) {
-			        final String item = (String) parent.getItemAtPosition(position);
-			        view.animate().setDuration(1000).alpha(0)
-			            .withEndAction(new Runnable() {
-			              @Override
-			              public void run() {
-			                list.remove(item);
-			                adapter.notifyDataSetChanged();
-			                view.setAlpha(1);
-			              }
-			            });
-			      }
-
-			    });
-			
-			
-			new JsonDataRetriever()
-			{
-			    @Override public void onPostExecute(JSONObject jsonResult)
-			    {
-			    	// TODO: do something with the jsonResult.
-			    	spinner.setVisibility(View.INVISIBLE);
-			    }
-			}.execute("http://dragthor.github.io/southridge/albums-11.json");
+		      @Override
+		      public void onItemClick(AdapterView<?> parent, final View view,
+		          int position, long id) {
+		        final String item = (String) parent.getItemAtPosition(position);
+		        view.animate().setDuration(1000).alpha(0)
+		            .withEndAction(new Runnable() {
+		              @Override
+		              public void run() {
+		                list.remove(item);
+		                adapter.notifyDataSetChanged();
+		                view.setAlpha(1);
+		              }
+		            });
+		      }
+	
+		    });
+				
+			spinner.setVisibility(View.INVISIBLE);
 			
 			return rootView;
-
 		}
 	}
 }

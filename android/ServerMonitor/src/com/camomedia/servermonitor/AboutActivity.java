@@ -3,12 +3,7 @@ package com.camomedia.servermonitor;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.app.Activity;
-import android.content.Intent;
 import android.text.util.Linkify;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class AboutActivity extends Activity {

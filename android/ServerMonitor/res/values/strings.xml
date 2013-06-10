@@ -18,7 +18,7 @@
     <string-array name="qa_items"></string-array>
     <string-array name="dev_items"></string-array>
 
-    <string name="unit_test_settings">Tests</string>
+    <string name="unit_test_settings">Run Tests</string>
     <string name="title_activity_about">About</string>
     <string name="about_main">Server Monitor</string>
     <string name="about_version">Version 0.1</string>
@@ -28,5 +28,6 @@
     <string name="about_license_wikiUrl">http://www.github.com/dragthor</string>
     <string name="about_license_projectUrl">http://dragthor.github.io</string>
     <string name="title_activity_test">Tests</string>
+    <string name="close_settings">Quit</string>
 
 </resources>
