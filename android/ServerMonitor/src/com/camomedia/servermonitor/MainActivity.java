@@ -3,14 +3,11 @@ package com.camomedia.servermonitor;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import org.json.JSONObject;
-
 import com.camomedia.servermonitor.R;
 import com.camomedia.servermonitor.tests.JsonTest;
 import com.camomedia.servermonitor.tests.ParseTest;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;

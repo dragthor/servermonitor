@@ -5,7 +5,6 @@ import android.content.Intent;
 
 import com.parse.Parse;
 import com.parse.ParseAnalytics;
-import com.parse.ParseObject;
 
 public class ParseManager {
 	public static final String PARSE_APPID = "KQLXx6w5tQmzP9qacxwac4HLfy1eewISrBPPyvnU";

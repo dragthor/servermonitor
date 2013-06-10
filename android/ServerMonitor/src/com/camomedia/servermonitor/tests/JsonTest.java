@@ -37,18 +37,16 @@ public class JsonTest {
 			    			throw new Exception("Json data array is zero");
 			    		}
 			    		
-			    		 Log.d(MainActivity.TAG, Integer.toString(data.length()));
+			    		Log.d(MainActivity.TAG, Integer.toString(data.length()));
 			    		 
-			    		 
-			    		/*
-			    		JSONArray jsonPersonData = data.getJSONArray(1);
-			    		
-			    		for (int i=0; i<jsonPersonData.length(); i++) {
-			    		    JSONObject item = jsonPersonData.getJSONObject(i);
+			    		for (int i = 0; i < data.length(); i++) {
+			    		    JSONObject item = data.getJSONObject(i);
+			    		   
 			    		    String name = item.getString("name");
-			   
-			    		    Log.d(MainActivity.TAG, name);
-			    		} */
+			    		    Integer count = item.getInt("count");
+			    		    
+			    		    Log.d(MainActivity.TAG, name + " - " + Integer.toString(count));
+			    		} 
 			    	}
 		    	} catch (Exception ex) {
 		    		Log.e(MainActivity.TAG, "JsonTest", ex);
