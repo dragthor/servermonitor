@@ -13,10 +13,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="@string/about_main"
-        android:textStyle="bold" 
-        />
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/lblVersion"
@@ -36,8 +36,7 @@
         android:layout_marginTop="30dp"
         android:text="@string/about_email" />
     
-   
-                <TextView
+        <TextView
         android:id="@+id/lblLicense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -46,7 +45,7 @@
         android:layout_marginTop="30dp"
         android:text="@string/about_license" />
                 
-                               <TextView
+        <TextView
         android:id="@+id/lblLicenseCopyright"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,13 +53,22 @@
         android:layout_below="@+id/lblLicense"
         android:layout_marginTop="30dp"
         android:text="@string/about_license_copyright" />
-                               
-     <TextView
+              
+        <TextView
         android:id="@+id/lblWiki"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/lblLicenseCopyright"
         android:layout_below="@+id/lblLicenseCopyright"
+        android:layout_marginTop="30dp"
+        android:text="@string/about_wiki" />
+                                  
+     	<TextView
+        android:id="@+id/lblWikiUrl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lblWiki"
+        android:layout_below="@+id/lblWiki"
         android:layout_marginTop="30dp"
         android:text="@string/about_license_wikiUrl" />
      
@@ -68,9 +76,30 @@
         android:id="@+id/lblProjectHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/lblWiki"
-        android:layout_below="@+id/lblWiki"
+        android:layout_alignLeft="@+id/lblWikiUrl"
+        android:layout_below="@+id/lblWikiUrl"
         android:layout_marginTop="30dp"
         android:text="@string/about_license_projectUrl" />
      
+          <TextView
+        android:id="@+id/lblPrivacy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lblProjectHome"
+        android:layout_below="@+id/lblProjectHome"
+        android:layout_marginTop="30dp"
+        android:text="@string/about_privacy" />
+          
+      
+                  <TextView
+        android:id="@+id/lblPrivacyUrl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lblPrivacy"
+        android:layout_below="@+id/lblPrivacy"
+        android:layout_marginTop="30dp"
+        android:text="@string/about_privacyUrl" />
+     
+          
+          
 </RelativeLayout>

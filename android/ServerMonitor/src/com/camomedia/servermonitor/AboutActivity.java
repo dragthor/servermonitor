@@ -31,5 +31,9 @@ public class AboutActivity extends Activity {
         TextView projectHome = (TextView) this.findViewById(R.id.lblProjectHome);
         
         Linkify.addLinks(projectHome, Linkify.WEB_URLS);
+        
+        TextView privacy = (TextView) this.findViewById(R.id.lblPrivacyUrl);
+        
+        Linkify.addLinks(privacy, Linkify.WEB_URLS);
 	}
 }

@@ -7,7 +7,7 @@ import org.json.*;
 public class JsonDataRetriever extends AsyncTask<String, Integer, JSONObject> {
 
 	public JsonDataRetriever() {
-	
+		super();
 	}
 	
 	@Override

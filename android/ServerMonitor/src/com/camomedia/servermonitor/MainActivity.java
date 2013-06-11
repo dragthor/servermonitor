@@ -3,6 +3,8 @@ package com.camomedia.servermonitor;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import org.json.JSONObject;
+
 import com.camomedia.servermonitor.R;
 import com.camomedia.servermonitor.tests.JsonTest;
 import com.camomedia.servermonitor.tests.ParseTest;
@@ -21,8 +23,10 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
@@ -53,7 +57,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
+				
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -82,7 +86,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 					.setText(mSectionsPagerAdapter.getPageTitle(i))
 					.setTabListener(this));
 		}
-		
+				
 		ParseManager.Initialize(this, getIntent());
 	}
 
@@ -165,11 +169,11 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			Locale l = Locale.getDefault();
 			switch (position) {
 			case 0:
-				return getString(R.string.title_section1).toUpperCase(l);
+				return getString(R.string.title_tab1).toUpperCase(l);
 			case 1:
-				return getString(R.string.title_section2).toUpperCase(l);
+				return getString(R.string.title_tab2).toUpperCase(l);
 			case 2:
-				return getString(R.string.title_section3).toUpperCase(l);
+				return getString(R.string.title_tab3).toUpperCase(l);
 			}
 			return null;
 		}
@@ -193,8 +197,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 			
 			View rootView = inflater.inflate(R.layout.fragment_main_dummy, container, false);
+		
+			final Button refresh = (Button) rootView.findViewById(R.id.btnRefresh);
 			
-			final ProgressBar spinner = (ProgressBar) rootView.findViewById(R.id.progressBar1);
+			final ProgressBar spinner = (ProgressBar) rootView.findViewById(R.id.prgLoading);
 	
 			spinner.setVisibility(View.INVISIBLE);
 			
@@ -238,6 +244,21 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		    });
 				
 			spinner.setVisibility(View.INVISIBLE);
+			
+			refresh.setOnClickListener(new OnClickListener() {
+			    public void onClick(View arg0) {
+			    	spinner.setVisibility(View.VISIBLE);
+			    	refresh.setEnabled(false);
+			    	
+			    	new DummyAsyncTask() {
+				    	@Override public void onPostExecute(String result) {
+				    		spinner.setVisibility(View.INVISIBLE);
+				    		refresh.setEnabled(true);
+				    	}
+			    	}
+			    	.execute("test");
+			    }
+			}); 
 			
 			return rootView;
 		}
