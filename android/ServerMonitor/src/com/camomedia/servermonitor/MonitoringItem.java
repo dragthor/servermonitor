@@ -7,6 +7,7 @@ public class MonitoringItem {
 	public static final String PARSE_CLASS = "Monitoring";
 	
 	// Parse field names.
+	public static final String PARSE_OBJECTID = "objectId";
 	public static final String PARSE_PARSETYPE = "ParseType";
 	public static final String PARSE_TAB = "Tab";
 	public static final String PARSE_PATTERN = "Pattern";
@@ -16,7 +17,16 @@ public class MonitoringItem {
 	private int _tab;
 	private String _pattern;
 	private String _url;
+	private String _objectId;
 	
+	public String get_objectId() {
+		return _objectId;
+	}
+
+	public void set_objectId(String _objectId) {
+		this._objectId = _objectId;
+	}
+
 	public int get_tab() {
 		return _tab;
 	}

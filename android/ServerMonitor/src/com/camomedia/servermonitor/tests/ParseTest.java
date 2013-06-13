@@ -45,10 +45,12 @@ public class ParseTest {
 		        	for (int i = 0; i < list.size(); i++) {
 			        	MonitoringItem item = new MonitoringItem();
 			        	
+			        	item.set_objectId(list.get(i).getObjectId());
 			        	item.set_pattern((String) list.get(i).get(MonitoringItem.PARSE_PATTERN));
 			        	item.set_url((String) list.get(i).get(MonitoringItem.PARSE_URL));
 			        	
-			            Log.d(MainActivity.TAG, "Retrieved " + item.get_url());
+			        	Log.d(MainActivity.TAG, "Retrieved object " + item.get_objectId());
+			            Log.d(MainActivity.TAG, "With url " + item.get_url());
 			            Log.d(MainActivity.TAG, "With pattern  " + item.get_pattern());
 		        	}
 		        } else {
