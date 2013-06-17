@@ -1,9 +1,6 @@
 package com.camomedia.servermonitor;
 
-import java.util.ArrayList;
 import java.util.Locale;
-
-import org.json.JSONObject;
 
 import com.camomedia.servermonitor.R;
 import com.camomedia.servermonitor.tests.JsonTest;
@@ -18,22 +15,10 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.ProgressBar;
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
-
-	public static final String TAG = "ServerMonitor";
-
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
 	 * fragments for each of the sections. We use a
@@ -149,11 +134,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		@Override
 		public Fragment getItem(int position) {
 			// getItem is called to instantiate the fragment for the given page.
-			// Return a DummySectionFragment (defined as a static inner class
-			// below) with the page number as its lone argument.
-			Fragment fragment = new DummySectionFragment();
+			// Return a MonitoringGroupFragment with the page number as its lone argument.
+			Fragment fragment = new MonitoringGroupFragment();
 			Bundle args = new Bundle();
-			args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
+			args.putInt(MonitoringGroupFragment.ARG_SECTION_NUMBER, position + 1);
 			fragment.setArguments(args);
 			return fragment;
 		}
@@ -176,91 +160,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 				return getString(R.string.title_tab3).toUpperCase(l);
 			}
 			return null;
-		}
-	}
-
-	/**
-	 * A dummy fragment representing a section of the app, but that simply
-	 * displays dummy text.
-	 */
-	public static class DummySectionFragment extends Fragment {
-		/**
-		 * The fragment argument representing the section number for this
-		 * fragment.
-		 */
-		public static final String ARG_SECTION_NUMBER = "section_number";
-
-		public DummySectionFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-			
-			View rootView = inflater.inflate(R.layout.fragment_main_dummy, container, false);
-		
-			final Button refresh = (Button) rootView.findViewById(R.id.btnRefresh);
-			
-			final ProgressBar spinner = (ProgressBar) rootView.findViewById(R.id.prgLoading);
-	
-			spinner.setVisibility(View.INVISIBLE);
-			
-			int sectionNumber = getArguments().getInt(ARG_SECTION_NUMBER);
-			
-			spinner.setVisibility(View.VISIBLE);
-			
-			ListView listItem = (ListView) rootView.findViewById(R.id.lstItems);
-			
-			String[] listValues = getResources().getStringArray(R.array.prod_items);
-			
-			final ArrayList<String> list = new ArrayList<String>();
-		    
-			for (int i = 0; i < listValues.length; ++i) {
-		      list.add(listValues[i]);
-		    }
-		    
-			final ServerArrayAdapter adapter = new ServerArrayAdapter(this.getActivity(), android.R.layout.simple_list_item_1, list);
-				
-			Log.d(MainActivity.TAG, "Section: " + Integer.toString(sectionNumber) + ", " + Integer.toString(list.size()));
-			
-			listItem.setAdapter(adapter);
-			
-			listItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-		      @Override
-		      public void onItemClick(AdapterView<?> parent, final View view,
-		          int position, long id) {
-		        final String item = (String) parent.getItemAtPosition(position);
-		        view.animate().setDuration(1000).alpha(0)
-		            .withEndAction(new Runnable() {
-		              @Override
-		              public void run() {
-		                list.remove(item);
-		                adapter.notifyDataSetChanged();
-		                view.setAlpha(1);
-		              }
-		            });
-		      }
-	
-		    });
-				
-			spinner.setVisibility(View.INVISIBLE);
-			
-			refresh.setOnClickListener(new OnClickListener() {
-			    public void onClick(View arg0) {
-			    	spinner.setVisibility(View.VISIBLE);
-			    	refresh.setEnabled(false);
-			    	
-			    	new DummyAsyncTask() {
-				    	@Override public void onPostExecute(String result) {
-				    		spinner.setVisibility(View.INVISIBLE);
-				    		refresh.setEnabled(true);
-				    	}
-			    	}
-			    	.execute("test");
-			    }
-			}); 
-			
-			return rootView;
 		}
 	}
 }

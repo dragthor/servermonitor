@@ -7,13 +7,14 @@ import android.util.Log;
 
 import com.camomedia.servermonitor.JsonDataRetriever;
 import com.camomedia.servermonitor.MainActivity;
+import com.camomedia.servermonitor.Utils;
 
 public class JsonTest {
 	public static void TestAll() {
 		try {
 			Sanity_Json_Get_Test();
 		} catch (Exception ex) {
-			Log.e(MainActivity.TAG, "JsonTest", ex);
+			Log.e(Utils.TAG, "JsonTest", ex);
 		}	
 	}
 	
@@ -37,7 +38,7 @@ public class JsonTest {
 			    			throw new Exception("Json data array is zero");
 			    		}
 			    		
-			    		Log.d(MainActivity.TAG, Integer.toString(data.length()));
+			    		Log.d(Utils.TAG, Integer.toString(data.length()));
 			    		 
 			    		for (int i = 0; i < data.length(); i++) {
 			    		    JSONObject item = data.getJSONObject(i);
@@ -45,11 +46,11 @@ public class JsonTest {
 			    		    String name = item.getString("name");
 			    		    Integer count = item.getInt("count");
 			    		    
-			    		    Log.d(MainActivity.TAG, name + " - " + Integer.toString(count));
+			    		    Log.d(Utils.TAG, name + " - " + Integer.toString(count));
 			    		} 
 			    	}
 		    	} catch (Exception ex) {
-		    		Log.e(MainActivity.TAG, "JsonTest", ex);
+		    		Log.e(Utils.TAG, "JsonTest", ex);
 		    	}
 		    }
 		}.execute("http://dragthor.github.io/southridge/albums-11.json");	

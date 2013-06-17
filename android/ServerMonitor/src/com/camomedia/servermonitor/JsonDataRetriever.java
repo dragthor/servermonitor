@@ -15,11 +15,11 @@ public class JsonDataRetriever extends AsyncTask<String, Integer, JSONObject> {
 		JSONObject json = null;
 		
 		try {
-			Log.e(MainActivity.TAG, urls[0]);
+			Log.e(Utils.TAG, urls[0]);
 			
 			json = Json.getJson(urls[0]);
 		} catch (Exception ex) {
-			Log.e(MainActivity.TAG, ex.getMessage());
+			Log.e(Utils.TAG, ex.getMessage());
 		}
 		return json;
 	}

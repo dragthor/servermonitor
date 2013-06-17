@@ -4,8 +4,8 @@ import java.util.List;
 
 import android.util.Log;
 
-import com.camomedia.servermonitor.MainActivity;
 import com.camomedia.servermonitor.MonitoringItem;
+import com.camomedia.servermonitor.Utils;
 import com.parse.FindCallback;
 import com.parse.ParseACL;
 import com.parse.ParseException;
@@ -19,7 +19,7 @@ public class ParseTest {
 			Monitor_Save_Test();
 			Monitor_Query_Test();
 		} catch (Exception ex) {
-			Log.e(MainActivity.TAG, "ParseTest", ex);
+			Log.e(Utils.TAG, "ParseTest", ex);
 		}
 	}
 	
@@ -49,12 +49,12 @@ public class ParseTest {
 			        	item.set_pattern((String) list.get(i).get(MonitoringItem.PARSE_PATTERN));
 			        	item.set_url((String) list.get(i).get(MonitoringItem.PARSE_URL));
 			        	
-			        	Log.d(MainActivity.TAG, "Retrieved object " + item.get_objectId());
-			            Log.d(MainActivity.TAG, "With url " + item.get_url());
-			            Log.d(MainActivity.TAG, "With pattern  " + item.get_pattern());
+			        	Log.d(Utils.TAG, "Retrieved object " + item.get_objectId());
+			            Log.d(Utils.TAG, "With url " + item.get_url());
+			            Log.d(Utils.TAG, "With pattern  " + item.get_pattern());
 		        	}
 		        } else {
-		            Log.d(MainActivity.TAG, "Error: " + e.getMessage());
+		            Log.d(Utils.TAG, "Error: " + e.getMessage());
 		        }	
 			}
 		});
