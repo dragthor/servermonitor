@@ -29,22 +29,8 @@ public class MonitoringGroupFragment extends Fragment {
 	public MonitoringGroupFragment() {
 	}
 	
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		
-		View rootView = inflater.inflate(R.layout.fragment_main_dummy, container, false);
-	
-		final Button refresh = (Button) rootView.findViewById(R.id.btnRefresh);
-		
-		final ProgressBar spinner = (ProgressBar) rootView.findViewById(R.id.prgLoading);
-
-		spinner.setVisibility(View.INVISIBLE);
-		
-		int sectionNumber = getArguments().getInt(ARG_SECTION_NUMBER);
-		
-		spinner.setVisibility(View.VISIBLE);
-		
-		ListView listItem = (ListView) rootView.findViewById(R.id.lstItems);
+	public void refreshItems(int sectionNumber) {
+		ListView listItem = (ListView) this.getActivity().findViewById(R.id.lstItems);
 		
 		String[] listValues = getResources().getStringArray(R.array.prod_items);
 		
@@ -54,7 +40,7 @@ public class MonitoringGroupFragment extends Fragment {
 	      list.add(listValues[i]);
 	    }
 	    
-		final ServerArrayAdapter adapter = new ServerArrayAdapter(this.getActivity(), android.R.layout.simple_list_item_1, list);
+		final ServerArrayAdapter adapter = new ServerArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, list);
 			
 		Log.d(Utils.TAG, "Section: " + Integer.toString(sectionNumber) + ", " + Integer.toString(list.size()));
 		
@@ -62,22 +48,31 @@ public class MonitoringGroupFragment extends Fragment {
 		
 		listItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-	      @Override
-	      public void onItemClick(AdapterView<?> parent, final View view,
-	          int position, long id) {
+	    @Override
+	    public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
 	        final String item = (String) parent.getItemAtPosition(position);
-	        view.animate().setDuration(1000).alpha(0)
-	            .withEndAction(new Runnable() {
+	        view.animate().setDuration(1000).alpha(0).withEndAction(new Runnable() {
 	              @Override
 	              public void run() {
 	                list.remove(item);
 	                adapter.notifyDataSetChanged();
 	                view.setAlpha(1);
 	              }
-	            });
+	        });
 	      }
-
 	    });
+		
+	}
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View rootView = inflater.inflate(R.layout.fragment_main_dummy, container, false);
+	
+		final Button refresh = (Button) rootView.findViewById(R.id.btnRefresh);
+		
+		final ProgressBar spinner = (ProgressBar) rootView.findViewById(R.id.prgLoading);
+		
+		final int sectionNumber = getArguments().getInt(ARG_SECTION_NUMBER);
 			
 		spinner.setVisibility(View.INVISIBLE);
 		
@@ -89,6 +84,9 @@ public class MonitoringGroupFragment extends Fragment {
 		    	new DummyAsyncTask() {
 			    	@Override public void onPostExecute(String result) {
 			    		spinner.setVisibility(View.INVISIBLE);
+			    		
+			    		refreshItems(sectionNumber);
+			    		
 			    		refresh.setEnabled(true);
 			    	}
 		    	}
