@@ -106,7 +106,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
 		int pos = tab.getPosition();
 		
-		Toast.makeText(this.getBaseContext(), Integer.toString(pos) + " Selected", Toast.LENGTH_SHORT).show();
+		Toast.makeText(this.getBaseContext(), Integer.toString(pos + 1) + " Selected", Toast.LENGTH_SHORT).show();
 		
 		// When the given tab is selected, switch to the corresponding page in the ViewPager.
 		_viewPager.setCurrentItem(pos);
@@ -114,14 +114,14 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
 	@Override
 	public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-		int pos = tab.getPosition();
+		int pos = tab.getPosition() + 1;
 		
 		Toast.makeText(this.getBaseContext(), Integer.toString(pos) + " Unselected", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
 	public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-		int pos = tab.getPosition();
+		int pos = tab.getPosition() + 1;
 		
 		Toast.makeText(this.getBaseContext(), Integer.toString(pos) + " Reselected", Toast.LENGTH_SHORT).show();
 	}

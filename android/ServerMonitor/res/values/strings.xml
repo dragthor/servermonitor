@@ -3,9 +3,9 @@
 
     <string name="app_name">Server Monitor</string>
     <string name="action_settings">Settings</string>
-    <string name="title_prod">Prod</string>
-    <string name="title_qa">QA</string>
-    <string name="title_shop">Shop</string>
+    <string name="bar_prod">Prod</string>
+    <string name="bar_qa">QA</string>
+    <string name="bar_shop">Shop</string>
     <string name="about_settings">About</string>
 
     <string-array name="prod_items">

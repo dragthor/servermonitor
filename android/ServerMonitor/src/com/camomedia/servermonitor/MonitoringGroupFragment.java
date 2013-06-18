@@ -13,11 +13,11 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 
 /**
- * A dummy fragment representing a section of the app, but that simply
- * displays dummy text.
+ * A fragment representing a section of the app - a listview and a refresh button.
  */
 public class MonitoringGroupFragment extends Fragment {
 	/**
@@ -60,8 +60,7 @@ public class MonitoringGroupFragment extends Fragment {
 	              }
 	        });
 	      }
-	    });
-		
+	    });	
 	}
 	
 	@Override
@@ -73,7 +72,9 @@ public class MonitoringGroupFragment extends Fragment {
 		final ProgressBar spinner = (ProgressBar) rootView.findViewById(R.id.prgLoading);
 		
 		final int sectionNumber = getArguments().getInt(ARG_SECTION_NUMBER);
-			
+		
+		Toast.makeText(rootView.getContext(), Integer.toString(sectionNumber) + " Created", Toast.LENGTH_SHORT).show();
+		
 		spinner.setVisibility(View.INVISIBLE);
 		
 		refresh.setOnClickListener(new OnClickListener() {
