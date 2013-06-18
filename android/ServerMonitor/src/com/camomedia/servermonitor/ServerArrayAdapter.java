@@ -7,19 +7,19 @@ import android.content.Context;
 import android.widget.ArrayAdapter;
 
 public class ServerArrayAdapter extends ArrayAdapter<String> {
-	HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
+	private HashMap<String, Integer> _map = new HashMap<String, Integer>();
 
     public ServerArrayAdapter(Context context, int textViewResourceId, List<String> objects) {
       super(context, textViewResourceId, objects);
       for (int i = 0; i < objects.size(); ++i) {
-        mIdMap.put(objects.get(i), i);
+    	  _map.put(objects.get(i), i);
       }	
     }
 
     @Override
     public long getItemId(int position) {
       String item = getItem(position);
-      return mIdMap.get(item);
+      return _map.get(item);
     }
 
     @Override

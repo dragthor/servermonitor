@@ -1,7 +1,5 @@
 package com.camomedia.servermonitor;
 
-import java.util.Locale;
-
 import com.camomedia.servermonitor.R;
 import com.camomedia.servermonitor.tests.JsonTest;
 import com.camomedia.servermonitor.tests.ParseTest;
@@ -10,13 +8,11 @@ import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
 	/**
@@ -27,12 +23,12 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	 * intensive, it may be best to switch to a
 	 * {@link android`.support.v4.app.FragmentStatePagerAdapter}.
 	 */
-	SectionsPagerAdapter mSectionsPagerAdapter;
+	SectionsPagerAdapter _sectionsPagerAdapter;
 
 	/**
 	 * The {@link ViewPager} that will host the section contents.
 	 */
-	ViewPager mViewPager;
+	ViewPager _viewPager;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,16 +41,16 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 				
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
-		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+		_sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), this.getBaseContext());
 
 		// Set up the ViewPager with the sections adapter.
-		mViewPager = (ViewPager) findViewById(R.id.pager);
-		mViewPager.setAdapter(mSectionsPagerAdapter);
+		_viewPager = (ViewPager) findViewById(R.id.pager);
+		_viewPager.setAdapter(_sectionsPagerAdapter);
 
 		// When swiping between different sections, select the corresponding
 		// tab. We can also use ActionBar.Tab#select() to do this if we have
 		// a reference to the Tab.
-		mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+		_viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 			@Override
 			public void onPageSelected(int position) {
 				actionBar.setSelectedNavigationItem(position);
@@ -62,13 +58,13 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		});
 
 		// For each of the sections in the app, add a tab to the action bar.
-		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
+		for (int i = 0; i < _sectionsPagerAdapter.getCount(); i++) {
 			// Create a tab with text corresponding to the page title defined by
 			// the adapter. Also specify this Activity object, which implements
 			// the TabListener interface, as the callback (listener) for when
 			// this tab is selected.
 			actionBar.addTab(actionBar.newTab()
-					.setText(mSectionsPagerAdapter.getPageTitle(i))
+					.setText(_sectionsPagerAdapter.getPageTitle(i))
 					.setTabListener(this));
 		}
 				
@@ -86,80 +82,47 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // Handle item selection
 	    switch (item.getItemId()) {
-	    case R.id.about_settings:
-	    	Intent aboutIntent = new Intent(this, AboutActivity.class);
-	    	startActivity(aboutIntent);
-	        return true;
-	    case R.id.action_settings:
-	    	Intent settingsIntent = new Intent(this, SettingsActivity.class);
-	    	startActivity(settingsIntent);
-	        return true;
-	    case R.id.unit_test_settings:
-	    	ParseTest.TestAll();
-	    	JsonTest.TestAll();
-	    	return true;
-	    case R.id.close_settings:
-	    	this.finish();
-	    	return true;
-	    default:
-	        return super.onOptionsItemSelected(item);
+		    case R.id.about_settings:
+		    	Intent aboutIntent = new Intent(this, AboutActivity.class);
+		    	startActivity(aboutIntent);
+		        return true;
+		    case R.id.action_settings:
+		    	Intent settingsIntent = new Intent(this, SettingsActivity.class);
+		    	startActivity(settingsIntent);
+		        return true;
+		    case R.id.unit_test_settings:
+		    	ParseTest.TestAll();
+		    	JsonTest.TestAll();
+		    	return true;
+		    case R.id.close_settings:
+		    	this.finish();
+		    	return true;
+		    default:
+		        return super.onOptionsItemSelected(item);
 	    }
 	}
 	
 	@Override
 	public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-		// When the given tab is selected, switch to the corresponding page in
-		// the ViewPager.
-		mViewPager.setCurrentItem(tab.getPosition());
+		int pos = tab.getPosition();
+		
+		Toast.makeText(this.getBaseContext(), Integer.toString(pos) + " Selected", Toast.LENGTH_SHORT).show();
+		
+		// When the given tab is selected, switch to the corresponding page in the ViewPager.
+		_viewPager.setCurrentItem(pos);
 	}
 
 	@Override
 	public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+		int pos = tab.getPosition();
+		
+		Toast.makeText(this.getBaseContext(), Integer.toString(pos) + " Unselected", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
 	public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-	}
-
-	/**
-	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-	 * one of the sections/tabs/pages.
-	 */
-	public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-		public SectionsPagerAdapter(FragmentManager fm) {
-			super(fm);
-		}
-
-		@Override
-		public Fragment getItem(int position) {
-			// getItem is called to instantiate the fragment for the given page.
-			// Return a MonitoringGroupFragment with the page number as its lone argument.
-			Fragment fragment = new MonitoringGroupFragment();
-			Bundle args = new Bundle();
-			args.putInt(MonitoringGroupFragment.ARG_SECTION_NUMBER, position + 1);
-			fragment.setArguments(args);
-			return fragment;
-		}
-
-		@Override
-		public int getCount() {
-			// Show 3 total pages.
-			return 3;
-		}
-
-		@Override
-		public CharSequence getPageTitle(int position) {
-			Locale l = Locale.getDefault();
-			switch (position) {
-			case 0:
-				return getString(R.string.title_tab1).toUpperCase(l);
-			case 1:
-				return getString(R.string.title_tab2).toUpperCase(l);
-			case 2:
-				return getString(R.string.title_tab3).toUpperCase(l);
-			}
-			return null;
-		}
+		int pos = tab.getPosition();
+		
+		Toast.makeText(this.getBaseContext(), Integer.toString(pos) + " Reselected", Toast.LENGTH_SHORT).show();
 	}
 }
